@@ -34,9 +34,15 @@ public class Application {
         ServiceCredentials serviceCredentials,
         @Value("${s3.endpointUrl:#{null}}") String s3EndpointUrl
     ) {
+/*
         String s3AccessKey = serviceCredentials.getCredential("moviefun-s3", "aws-s3", "access_key_id");
         String s3SecretKey = serviceCredentials.getCredential("moviefun-s3", "aws-s3", "secret_access_key");
         String s3BucketName = serviceCredentials.getCredential("moviefun-s3", "aws-s3", "bucket");
+*/
+
+        String s3AccessKey = System.getenv("S3_ACCESSKEY");
+        String s3SecretKey = System.getenv("S3_SECRETKEY");
+        String s3BucketName = System.getenv("S3_BUCKETNAME");
 
         AWSCredentials credentials = new BasicAWSCredentials(s3AccessKey, s3SecretKey);
         AmazonS3Client s3Client = new AmazonS3Client(credentials);
