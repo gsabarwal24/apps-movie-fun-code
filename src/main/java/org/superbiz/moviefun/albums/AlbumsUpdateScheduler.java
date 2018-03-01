@@ -16,10 +16,9 @@ import javax.sql.DataSource;
 public class AlbumsUpdateScheduler {
 
     private static final long SECONDS = 1000;
-    private static final long MINUTES = 60 * SECONDS;
 
-    private final AlbumsUpdater albumsUpdater;
     private final JdbcTemplate jdbcTemplate;
+    private final AlbumsUpdater albumsUpdater;
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -37,11 +36,12 @@ public class AlbumsUpdateScheduler {
                 logger.debug("Starting albums update");
 
                 albumsUpdater.update();
-                logger.debug("Finished albums update");
 
+                logger.debug("Finished albums update");
             } else {
                 logger.debug("Nothing to start");
             }
+
         } catch (Throwable e) {
             logger.error("Error while updating albums", e);
         }
@@ -58,5 +58,4 @@ public class AlbumsUpdateScheduler {
 
         return updatedRows > 0;
     }
-
 }
